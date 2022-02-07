@@ -1,0 +1,36 @@
+type RewardOfCustomer { 
+    created_at: String @doc(description: "Timestamp indicating when the account was created")
+    group_id: Int @deprecated(reason: "Customer group should not be exposed in the storefront scenarios")
+    prefix: String @doc(description: "An honorific, such as Dr., Mr., or Mrs.")
+    firstname: String @doc(description: "The customer's first name")
+    middlename: String @doc(description: "The customer's middle name")
+    lastname: String @doc(description: "The customer's family name")
+    suffix: String @doc(description: "A value such as Sr., Jr., or III")
+    email: String @doc(description: "The customer's email address. Required")
+    default_billing: String @doc(description: "The ID assigned to the billing address")
+    default_shipping: String @doc(description: "The ID assigned to the shipping address")
+    dob: String @doc(description: "The customer's date of birth") @deprecated(reason: "Use `date_of_birth` instead")
+    date_of_birth: String @doc(description: "The customer's date of birth")
+    taxvat: String @doc(description: "The customer's Value-added tax (VAT) number (for corporate customers)")
+    is_subscribed: Boolean @doc(description: "Indicates whether the customer is subscribed to the company's newsletter") @resolver(class: "\\Magento\\CustomerGraphQl\\Model\\Resolver\\IsSubscribed")
+    addresses: [CustomerAddress] @doc(description: "An array containing the customer's shipping and billing addresses") @resolver(class: "\\Magento\\CustomerGraphQl\\Model\\Resolver\\CustomerAddresses")
+    gender: Int @doc(description: "The customer's gender (Male - 1, Female - 2)")
+}
+@resolver(class: "HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardCustomer")
+
+type CustomerReward { 
+    reward_infor(email: String!, password: String!): CustomerInforReward  @doc(description: "Information of customer's reward") @resolver(class: "\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardInfor")   
+    reward_order: [RewardOrder] @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardOrder")
+    reward_checkout: [RewardCheckOut] @doc(description:"Reward Segment") @resolver(class: "\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardQuote")
+    reward_conversion_rate: [RewardConversionRate] @doc(description: "The current exchange rates") @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardRate")
+}
+reward_order: [RewardOrder] @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardOrder")
+    reward_checkout: [RewardCheckOut] @doc(description:"Reward Segment") @resolver(class: "\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardQuote")
+    reward_conversion_rate: [RewardConversionRate] @doc(description: "The current exchange rates") @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardRate")
+
+type Mutation {
+    reward_infor(email: String!, password: String!): CustomerInforReward  @doc(description: "Information of customer's reward") @resolver(class: "\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardInfor")   
+    reward_order: [RewardOrder] @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardOrder")
+    reward_checkout: [RewardCheckOut] @doc(description:"Reward Segment") @resolver(class: "\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardQuote")
+    reward_conversion_rate: [RewardConversionRate] @doc(description: "The current exchange rates") @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardRate")
+}

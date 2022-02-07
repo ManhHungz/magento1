@@ -1,0 +1,9 @@
+input CustomerAddressInput {
+    address_extension: ExtensionAddress @resolver(class:"\\Swissup\\AddressFieldManager\\Model\\Resolver\\NewAddress")
+}
+
+type ExtensionAddress {
+    Hung: String
+    Max: MaxCodeEnum
+    Simicart: Boolean
+}

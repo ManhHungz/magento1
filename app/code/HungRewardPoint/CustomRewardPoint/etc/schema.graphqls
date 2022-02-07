@@ -1,0 +1,53 @@
+type Query {
+    rewardConfig: RewardPointConfig @doc(description: "config for rewardpoint") @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardConfig")
+    reward_icon: RewardIcon @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardIconPath")
+}
+
+type CartPrices {
+    reward_checkout: RewardCheckOut @doc(description:"Reward Segment") @resolver(class: "\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardQuote")
+}
+type Customer {
+    reward_conversion_rate: [RewardConversionRate] @doc(description: "The current exchange rates") @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardRate")
+    reward_infor: CustomerInforReward @doc(description: "Information of customer's reward") @resolver(class: "\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardInfor")  
+}
+
+type CustomerInforReward {
+    reward_id: Int
+    customer_id: Int
+    point_balance: Int
+    point_spent: Int
+    point_earned: Int
+    notification_update: Int
+    notification_expire: Int
+    reward_order(
+        customer_id: Int
+    ): [RewardOrder] @resolver(class:"\\HungRewardPoint\\CustomRewardPoint\\Model\\Resolver\\RewardOrder")
+}
+
+type RewardPointConfig {
+    general: Boolean
+}
+
+type RewardConversionRate {
+    direction: Int
+    points: Int
+    money: Int
+    priority: Int 
+}
+
+type RewardOrder {
+    mp_reward_earn: Int
+    mp_reward_spent: Int
+    status: String
+}
+
+type RewardCheckOut {
+    mp_reward_earn: Int
+    mp_reward_spent: Int
+    mp_reward_discount: Float
+}
+
+type RewardIcon {
+    path: String
+}
+
