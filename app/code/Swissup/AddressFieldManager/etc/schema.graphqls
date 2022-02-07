@@ -1,0 +1,9 @@
+type StoreConfig {
+    attribute_address: [AttributeAddress] @resolver(class:"\\Swissup\\AddressFieldManager\\Model\\Resolver\\AddressField")
+}
+
+type AttributeAddress {
+    attribute_code: String
+    is_required: Boolean
+    frontend_label: String
+}
