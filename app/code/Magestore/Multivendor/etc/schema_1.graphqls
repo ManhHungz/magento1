@@ -1,0 +1,24 @@
+type Query {
+    rewardcustomer(
+        rewardid: Int
+    ): CustomerInforReward @resolver(class: "Mageplaza\\RewardPoints\\Model\\Resolver\\RewardCustomer")
+}
+type CustomerInforReward {
+    	customer_id: Int
+        point_balance:Int
+        point_spent: Int
+        transaction_of_customer: [TransactionsCustomer]
+}
+type TransactionsCustomer {
+    action_code: String
+    action_type: Int
+    store_id: Int
+    point_amount: Int
+    point_remaining: Int
+    point_used: Int
+    status: String
+    order_id: Int
+    expire_email_sent: Int
+    extra_content: String
+}
+

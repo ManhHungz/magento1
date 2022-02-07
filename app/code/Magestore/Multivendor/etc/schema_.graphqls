@@ -1,0 +1,28 @@
+type Query {
+    vendors(
+        vendorid: Int
+    ): VendorDetails @resolver(class: "Magestore\\Multivendor\\Model\\Resolver\\VendorProduct")
+}
+type VendorDetails {
+    vendetail: [Details] @doc(description: "A list of vendor that match the filter criteria.")
+}
+
+type Details { 
+    id: Int
+    name: String
+    code: Int
+    address: String
+    phone: String
+    status: Int
+    vendorcollection: [Collectionpro]
+}
+type Collectionpro {
+    entity_id:String
+    attribute_set_id:String
+    type_id:String
+    sku:String
+    has_option:String
+    require_option:String
+    created_at:String
+    updated_at:String
+}
